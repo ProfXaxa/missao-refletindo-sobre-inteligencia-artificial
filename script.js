@@ -3,12 +3,14 @@ const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector("caixa-resultado");
 const textoResultado = document.querySelector("texto-resultado");
+const caixaImagem = document.querySelector(".caixa-imagem");
 
 const perguntas = [
   {
     enunciado:
       "Assim que saiu da escola você se depara com uma nova tecnologia, um chat que consegue responder todas as dúvidas que uma pessoa pode ter, ele também gera imagens e áudios hiper-realistas. Qual o primeiro pensamento?",
-    alternativas: [
+      imagem: "img/Um jovem recém-saído.png",
+      alternativas: [
         {
             texto: "Isso é assustador!",
             afirmacao: "afirmação"
@@ -22,7 +24,7 @@ const perguntas = [
   {
     enunciado:
       "Com a descoberta desta tecnologia, chamada Inteligência Artificial (IA), uma professora de tecnologia da escola decidiu fazer uma sequência de aulas sobre esta tecnologia. No fim de uma aula ela pede que você escreva um trabalho sobre o uso de IA em sala de aula. Qual atitude você toma?",
-    alternativas: [
+      alternativas: [
         {
       texto: "Utiliza uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento.",
       afirmacao: "afirmação"
@@ -90,6 +92,17 @@ function mostraPergunta(){
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaAlternativas.textContent = "";
+
+    // 🖼️ NOVO: Lógica para exibir a imagem
+  if (perguntaAtual.imagem && caixaImagem) {
+    caixaImagem.src = perguntaAtual.imagem;
+    caixaImagem.alt = `Imagem referente à pergunta: ${perguntaAtual.enunciado}`;
+    caixaImagem.style.display = 'block'; // Garante que a imagem esteja visível
+  } else if (caixaImagem) {
+    caixaImagem.style.display = 'none'; // Esconde a imagem se não houver caminho
+  }
+  // ------------------------------------
+
     mostraAlternativas();
 }
 
